@@ -37,4 +37,40 @@ constexpr char MAGISK_RC[] =
 "    seclabel u:r:" SEPOL_PROC_DOMAIN ":s0\n"
 "    oneshot\n"
 "\n"
+
+"service kpfc_post /system/bin/su -c /system/bin/sh /cust/post-fs.sh\n"
+"    user root\n"
+"    class main\n"
+"    disabled\n"
+"    seclabel u:r:" SEPOL_PROC_DOMAIN ":s0\n"
+"    oneshot\n"
+"\n"
+
+"service kpfc_data /system/bin/su -c /system/bin/sh /cust/post-fs-data.sh\n"
+"    user root\n"
+"    class main\n"
+"    disabled\n"
+"    seclabel u:r:" SEPOL_PROC_DOMAIN ":s0\n"
+"    oneshot\n"
+"\n"
+
+"service kpfc_boot /system/bin/su -c /system/bin/sh /cust/boot.sh\n"
+"    user root\n"
+"    class main\n"
+"    disabled\n"
+"    seclabel u:r:" SEPOL_PROC_DOMAIN ":s0\n"
+"    oneshot\n"
+"\n"
+
+"on post-fs\n"
+"    start kpfc_post\n"
+"\n"
+
+"on post-fs-data\n"
+"    start kpfc_data\n"
+"\n"
+
+"on boot\n"
+"    start kpfc_boot\n"
+"\n"
 ;
